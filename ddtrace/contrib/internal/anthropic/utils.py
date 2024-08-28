@@ -88,7 +88,7 @@ def tag_params_on_span(span, kwargs, integration):
     tagged_params = {}
     for k, v in kwargs.items():
         if k == "system" and integration.is_pc_sampled_span(span):
-            span.set_tag_str("anthropic.request.system", integration.trunc(v))
+            span.set_tag_str("anthropic.request.system", integration.trunc(str(v)))
         elif k not in ("messages", "model"):
             tagged_params[k] = v
     span.set_tag_str("anthropic.request.parameters", json.dumps(tagged_params))
